@@ -88,15 +88,10 @@ api.interceptors.response.use(response => {
     }
     return Promise.resolve(response.data);
 }, error => {
-    const loggableErrorStatus = [422, 500];
-    if (!!error.response && !!error.response.status && loggableErrorStatus.indexOf(error.response.status) !== -1) {
-        reportToSentry(error);
-    }
-
     const thirdPartyLookupUrlRoot = API_URL + pathConfig.admin.thirdPartyTools.substring('/'.length);
     let errorMessage = null;
     if (requestUrl.startsWith(thirdPartyLookupUrlRoot)) {
-        console.log('Skipping root error handling for 3rd party api'); // errors for tool api lookup are handled in actions/thirdPartyLookupTool.js
+        if (process.env.NODE_ENV !== 'test') { console.log('Skipping root error handling for 3rd party api'); } // errors for tool api lookup are handled in actions/thirdPartyLookupTool.js
     } else {
         if (!!error.response && (!!error.response.status || error.response.status === 0)) { // a completely bad response from api comes through as a http status code zero
             errorMessage = locale.global.errorMessages.generic;
@@ -113,15 +108,15 @@ api.interceptors.response.use(response => {
                 }
 
                 errorMessage = locale.global.errorMessages[error.response.status];
-            } else if (!!error.message && loggableErrorStatus.indexOf(error.response.status) !== -1) {
-                errorMessage = ((error.response || {}).data || {}).message || locale.global.errorMessages[error.response.status];
+            } else if (!!error.message && error.response.status.toString().charAt(0) === '5') {
+                errorMessage = ((error.response || {}).data || {}).message || locale.global.errorMessages[500];
             } else if (!!locale.global.errorMessages[error.response.status]) {
-                errorMessage = locale.global.errorMessages[error.response.status];
+                errorMessage = ((error.response || {}).data || {}).message || locale.global.errorMessages[error.response.status];
             } else {
-                errorMessage = locale.global.errorMessages.genericAlternate; // slightly different message, purely for future debugging
+                errorMessage = ((error.response || {}).data || {}).message || locale.global.errorMessages[500];
             }
 
-            if (error.response.status !== 403 && error.response.status !== 404) {
+            if (error.response.status !== 403 && error.response.status !== 404 && error.response.status !== 410) {
                 if (process.env.NODE_ENV === 'test') {
                     global.mockActionsStore.dispatch(showAppAlert(error.response.data));
                 } else {
