@@ -1423,13 +1423,13 @@ export default {
             },
             community: {
                 prompt: 'Select a security policy to apply',
-                fieldLabel: '',
+                fieldLabel: 'Community policy to apply to this PID',
                 selectedTitle: 'Selected community record security policy details',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id aliquam sapien. Aliquam rhoncus congue consectetur. Aenean sed sapien ipsum.',
             },
             collection: {
                 prompt: 'Select a security policy to apply',
-                fieldLabel: '',
+                fieldLabel: 'Collection policy to apply to this PID',
                 dataStreamFieldLabel: (<span>
                     Collection policy to apply to the <b>datastream</b> of this PID
                 </span>),
@@ -1441,7 +1441,7 @@ export default {
             },
             record: {
                 prompt: 'Select a security policy to apply',
-                fieldLabel: '',
+                fieldLabel: 'Record policy to apply to this PID',
                 dataStreamFieldLabel: '',
                 selectedTitle: 'Selected record level security policy details',
                 dataStreamSelectedTitle: 'Selected record level datastream security policy details',

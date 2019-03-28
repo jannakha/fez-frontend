@@ -32,7 +32,8 @@ const mapStateToProps = (state) => {
         disableSubmit: formErrors && !(formErrors instanceof Immutable.Map),
         initialValues: {
             communitySecurity: securityAssignments[0].policyID,
-            collectionSecurity: 2,
+            collectionSecurity: securityAssignments[1].policyID,
+            collectionDataStreamSecurity: securityAssignments[1].dataStreamPolicyID,
             collection: [],
             subject: []
         },
