@@ -4,7 +4,7 @@ import {
     EXISTING_RECORD_API,
     RECORDS_ISSUES_API,
     COMMUNITIES_SECURITY_POLICY_API,
-    // COLLECTIONS_SECURITY_POLICY_API,
+    COLLECTIONS_SECURITY_POLICY_API,
     // RECORDS_SECURITY_POLICY_API,
     // DATASTREAMS_SECURITY_POLICY_API
 } from 'repositories/routes';
@@ -280,6 +280,9 @@ export function getSecurity({ pid, type }) {
         case 'Community':
             API = (request) => COMMUNITIES_SECURITY_POLICY_API(request);
             break;
+        case 'Collection':
+            API = (request) => COLLECTIONS_SECURITY_POLICY_API(request);
+            break;
         default:
             break;
     }
@@ -293,7 +296,7 @@ export function getSecurity({ pid, type }) {
             return Promise.reject({message: 'Unknown type', status: 400});
         }
         dispatch({type: actions.SECURITY_POLICY_LOADING});
-        return get(API({ pid }))
+        return get(API({ id: pid }))
             .then(response => {
                 const data = {};
                 const pidSearchKey = Object.keys(transformers.getPidSearchKey())[0];
@@ -325,20 +328,25 @@ export function getSecurity({ pid, type }) {
     };
 }
 
-export function updateSecurity({ pid, security, type }) {
+export function updateSecurity({ pid, type, security, dataStreamSecurity }) {
     let API = null;
 
     switch (type) {
         case 'Community':
             API = (request) => COMMUNITIES_SECURITY_POLICY_API(request);
             break;
+        case 'Collection':
+            API = (request) => COLLECTIONS_SECURITY_POLICY_API(request);
+            break;
         default:
             break;
     }
 
     const request = {
+        id: pid,
         ...transformers.getPidSearchKey(pid),
-        ...transformers.getSecurityPolicySearchKey(security)
+        ...transformers.getSecurityPolicySearchKey(security),
+        ...transformers.getDataStreamSecurityPolicySearchKey(dataStreamSecurity)
     };
     return dispatch => {
         if(!API) {

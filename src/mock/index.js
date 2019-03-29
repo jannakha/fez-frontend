@@ -219,7 +219,19 @@ mock
 mock
     .onPatch(new RegExp(escapeRegExp(routes.COMMUNITIES_SECURITY_POLICY_API({
         id: '.*',
-        rek_security_policy: '.*'
+        pid: '.*',
+        rek_security_policy: '.*',
+        rek_datastream_policy: '.*'
+    }).apiUrl)))
+    .reply(200, {data: {...mockData.record}});
+;
+
+mock
+    .onPatch(new RegExp(escapeRegExp(routes.COLLECTIONS_SECURITY_POLICY_API({
+        id: '.*',
+        pid: '.*',
+        rek_security_policy: '.*',
+        rek_datastream_policy: '.*'
     }).apiUrl)))
     .reply(200, {data: {...mockData.record}});
 ;

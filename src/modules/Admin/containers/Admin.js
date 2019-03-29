@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import { reduxForm, getFormValues, getFormSyncErrors, SubmissionError } from 'redux-form/immutable';
-import { getSecurity } from 'actions';
+import { updateSecurity } from 'actions';
 import Immutable from 'immutable';
 import Admin from '../components/Admin';
 import { securityAssignments } from '../components/MockData';
@@ -11,10 +11,31 @@ import Cookies from 'js-cookie';
 const FORM_NAME = 'Prototype';
 
 const onSubmit = (values, dispatch) => {
-    return dispatch(getSecurity({
-        pid: securityAssignments[0].pid,
-        type: securityAssignments[0].type,
-        ...values.toJS()
+    let policyAssignmentRecord = {};
+    let security = null;
+    let dataStreamSecurity = null;
+
+    const formValues = values.toJS();
+
+    switch (formValues.type) {
+        case 'Community':
+            policyAssignmentRecord = securityAssignments[0];
+            security = formValues.communitySecurity;
+            break;
+        case 'Collection':
+            policyAssignmentRecord = securityAssignments[1];
+            security = formValues.collectionSecurity;
+            dataStreamSecurity = formValues.collectionDataStreamSecurity;
+            break;
+        default:
+            break;
+    }
+
+    return dispatch(updateSecurity({
+        pid: policyAssignmentRecord.pid,
+        type: formValues.type,
+        security,
+        dataStreamSecurity
     })).catch(error => {
         throw new SubmissionError({_error: error});
     });

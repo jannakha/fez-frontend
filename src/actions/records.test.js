@@ -1186,7 +1186,7 @@ describe('Record action creators', () => {
             };
 
             mockApi
-                .onGet(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
+                .onGet(repositories.routes.COMMUNITIES_SECURITY_POLICY_API({ id: testInput.pid }).apiUrl)
                 .reply(200, {data: recordWithSecurityPolicy});
 
             const expectedActions = [
@@ -1194,7 +1194,12 @@ describe('Record action creators', () => {
                 actions.SECURITY_POLICY_LOADED
             ];
 
-            await mockActionsStore.dispatch(recordActions.getSecurity(testInput));
+            const test = await mockActionsStore.dispatch(recordActions.getSecurity(testInput));
+            expect(test).toEqual({
+                pid: testInput.pid,
+                type: recordWithSecurityPolicy.rek_object_type_lookup,
+                communitySecurity: recordWithSecurityPolicy.rek_security_policy
+            });
             expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
 
         });
@@ -1206,7 +1211,7 @@ describe('Record action creators', () => {
             };
 
             mockApi
-                .onGet(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
+                .onGet(repositories.routes.COMMUNITIES_SECURITY_POLICY_API({ id: testInput.pid }).apiUrl)
                 .reply(200, {data: {}});
 
             const expectedActions = [
@@ -1220,11 +1225,11 @@ describe('Record action creators', () => {
 
         it('dispatches expected actions on missing request data', async () => {
             const testInput = {
-                type: 'Community'
+                type: 'Collection'
             };
 
             mockApi
-                .onGet(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
+                .onGet(repositories.routes.COLLECTIONS_SECURITY_POLICY_API({}).apiUrl)
                 .reply(500);
 
             const expectedActions = [
@@ -1272,7 +1277,7 @@ describe('Record action creators', () => {
             };
 
             mockApi
-                .onPatch(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
+                .onPatch(repositories.routes.COMMUNITIES_SECURITY_POLICY_API({ id: testInput.pid }).apiUrl)
                 .reply(200, {data: record});
 
             const expectedActions = [
@@ -1280,7 +1285,8 @@ describe('Record action creators', () => {
                 actions.SECURITY_POLICY_SAVED
             ];
 
-            await mockActionsStore.dispatch(recordActions.updateSecurity(testInput));
+            const test = await mockActionsStore.dispatch(recordActions.updateSecurity(testInput));
+            expect(test).toEqual(record);
             expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
 
         });
@@ -1292,7 +1298,7 @@ describe('Record action creators', () => {
             };
 
             mockApi
-                .onPatch(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
+                .onPatch(repositories.routes.COMMUNITIES_SECURITY_POLICY_API({ id: testInput.pid }).apiUrl)
                 .reply(200, {});
 
             const expectedActions = [
@@ -1306,11 +1312,11 @@ describe('Record action creators', () => {
 
         it('dispatches expected actions on missing request data', async () => {
             const testInput = {
-                type: 'Community'
+                type: 'Collection'
             };
 
             mockApi
-                .onPatch(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
+                .onPatch(repositories.routes.COLLECTIONS_SECURITY_POLICY_API({}).apiUrl)
                 .reply(500);
 
             const expectedActions = [

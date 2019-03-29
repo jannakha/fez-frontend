@@ -65,16 +65,16 @@ export const SecuritySection = ({ disabled, handleSubmit }) => {
                         required
                         validation={[validation.required]}
                     >
-                        <MenuItem value="community" >
+                        <MenuItem value="Community" >
                             {text.admin.typeField.menuItemText.community}
                         </MenuItem>
-                        <MenuItem value="collection" >
+                        <MenuItem value="Collection" >
                             {text.admin.typeField.menuItemText.collection}
                         </MenuItem>
-                        <MenuItem value="record" >
+                        <MenuItem value="Record" >
                             {text.admin.typeField.menuItemText.record}
                         </MenuItem>
-                        <MenuItem value="dataStream" >
+                        <MenuItem value="DataStream" >
                             {text.admin.typeField.menuItemText.dataStream}
                         </MenuItem>
                     </Field>
@@ -93,7 +93,7 @@ export const SecuritySection = ({ disabled, handleSubmit }) => {
                         <React.Fragment>
                             {
                                 formValues.get('level') === 'Superadmin' &&
-                                formValues.get('type') === 'community' &&
+                                formValues.get('type') === 'Community' &&
                                 <Grid item xs={12}>
                                     <SecurityCard
                                         disabled={disabled}
@@ -106,7 +106,7 @@ export const SecuritySection = ({ disabled, handleSubmit }) => {
                             }
                             {
                                 formValues.get('level') === 'Superadmin' &&
-                                formValues.get('type') === 'collection' &&
+                                formValues.get('type') === 'Collection' &&
                                 <Grid item xs={12}>
                                     <SecurityCard
                                         disabled={disabled}
@@ -119,7 +119,7 @@ export const SecuritySection = ({ disabled, handleSubmit }) => {
                                 </Grid>
                             }
                             {   formValues.get('level') &&
-                                formValues.get('type') === 'record' &&
+                                formValues.get('type') === 'Record' &&
                                 <Grid item xs={12}>
                                     <StandardCard title={<span><b>Record</b> level security - UQ:12345</span>} accentHeader>
                                         {formValues.get('collectionSecurity') &&

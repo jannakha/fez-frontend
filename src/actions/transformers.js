@@ -38,6 +38,10 @@ export const getSecurityPolicySearchKey = value => ({
     rek_security_policy: value
 });
 
+export const getDataStreamSecurityPolicySearchKey = value => ({
+    rek_datastream_policy: value
+});
+
 /* getRecordLinkSearchKey - returns link object formatted for record request
 * NOTE: link description is required to save link
 * @param {Object} form data may contain link attribute  {rek_link: {string}}
