@@ -632,7 +632,7 @@ export const licenses = [
     },
     {
         value: 453612,
-        text: 'Creative Commons Attribution noncommercial share alike http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US '
+        text: 'Creative Commons Attribution noncommercial share alike http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US'
     },
     {
         value: 453613,

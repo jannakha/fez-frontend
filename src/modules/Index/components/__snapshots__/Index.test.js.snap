@@ -2029,8 +2029,8 @@ exports[`Index page should render placeholders 1`] = `
                                                           "exportEspacePublications": [Function],
                                                           "exportPublications": [Function],
                                                           "fixRecord": [Function],
-                                                          "getSecurity": [Function],
                                                           "getSearchLookupApi": [Function],
+                                                          "getSecurity": [Function],
                                                           "getThirdPartyLookupApiUrl": [Function],
                                                           "hidePossiblyYourPublicationsLure": [Function],
                                                           "hideRecord": [Function],
@@ -2062,8 +2062,8 @@ exports[`Index page should render placeholders 1`] = `
                                                           "showAppAlert": [Function],
                                                           "submitThesis": [Function],
                                                           "unclaimRecord": [Function],
-                                                          "updateSecurity": [Function],
                                                           "updateCurrentAuthor": [Function],
+                                                          "updateSecurity": [Function],
                                                         }
                                                       }
                                                       history={
@@ -2135,8 +2135,8 @@ exports[`Index page should render placeholders 1`] = `
                                                             "exportEspacePublications": [Function],
                                                             "exportPublications": [Function],
                                                             "fixRecord": [Function],
-                                                            "getSecurity": [Function],
                                                             "getSearchLookupApi": [Function],
+                                                            "getSecurity": [Function],
                                                             "getThirdPartyLookupApiUrl": [Function],
                                                             "hidePossiblyYourPublicationsLure": [Function],
                                                             "hideRecord": [Function],
@@ -2168,8 +2168,8 @@ exports[`Index page should render placeholders 1`] = `
                                                             "showAppAlert": [Function],
                                                             "submitThesis": [Function],
                                                             "unclaimRecord": [Function],
-                                                            "updateSecurity": [Function],
                                                             "updateCurrentAuthor": [Function],
+                                                            "updateSecurity": [Function],
                                                           }
                                                         }
                                                         classes={
@@ -2248,8 +2248,8 @@ exports[`Index page should render placeholders 1`] = `
                                                               "exportEspacePublications": [Function],
                                                               "exportPublications": [Function],
                                                               "fixRecord": [Function],
-                                                              "getSecurity": [Function],
                                                               "getSearchLookupApi": [Function],
+                                                              "getSecurity": [Function],
                                                               "getThirdPartyLookupApiUrl": [Function],
                                                               "hidePossiblyYourPublicationsLure": [Function],
                                                               "hideRecord": [Function],
@@ -2281,8 +2281,8 @@ exports[`Index page should render placeholders 1`] = `
                                                               "showAppAlert": [Function],
                                                               "submitThesis": [Function],
                                                               "unclaimRecord": [Function],
-                                                              "updateSecurity": [Function],
                                                               "updateCurrentAuthor": [Function],
+                                                              "updateSecurity": [Function],
                                                             }
                                                           }
                                                           classes={
@@ -2795,8 +2795,8 @@ exports[`Index page should render placeholders 1`] = `
                                                                 "exportEspacePublications": [Function],
                                                                 "exportPublications": [Function],
                                                                 "fixRecord": [Function],
-                                                                "getSecurity": [Function],
                                                                 "getSearchLookupApi": [Function],
+                                                                "getSecurity": [Function],
                                                                 "getThirdPartyLookupApiUrl": [Function],
                                                                 "hidePossiblyYourPublicationsLure": [Function],
                                                                 "hideRecord": [Function],
@@ -2828,8 +2828,8 @@ exports[`Index page should render placeholders 1`] = `
                                                                 "showAppAlert": [Function],
                                                                 "submitThesis": [Function],
                                                                 "unclaimRecord": [Function],
-                                                                "updateSecurity": [Function],
                                                                 "updateCurrentAuthor": [Function],
+                                                                "updateSecurity": [Function],
                                                               }
                                                             }
                                                             classes={
@@ -4056,7 +4056,7 @@ exports[`Index page should render placeholders 1`] = `
                                                                                           id="text"
                                                                                         >
                                                                                           <b>
-                                                                                            There has been an error -
+                                                                                            There has been an error - 
                                                                                           </b>
                                                                                           Trending publications are temporarily unavailable
                                                                                         </div>
@@ -6259,8 +6259,8 @@ exports[`Index page should render placeholders 1`] = `
                                                                   "exportEspacePublications": [Function],
                                                                   "exportPublications": [Function],
                                                                   "fixRecord": [Function],
-                                                                  "getSecurity": [Function],
                                                                   "getSearchLookupApi": [Function],
+                                                                  "getSecurity": [Function],
                                                                   "getThirdPartyLookupApiUrl": [Function],
                                                                   "hidePossiblyYourPublicationsLure": [Function],
                                                                   "hideRecord": [Function],
@@ -6292,8 +6292,8 @@ exports[`Index page should render placeholders 1`] = `
                                                                   "showAppAlert": [Function],
                                                                   "submitThesis": [Function],
                                                                   "unclaimRecord": [Function],
-                                                                  "updateSecurity": [Function],
                                                                   "updateCurrentAuthor": [Function],
+                                                                  "updateSecurity": [Function],
                                                                 }
                                                               }
                                                             >
@@ -6319,8 +6319,8 @@ exports[`Index page should render placeholders 1`] = `
                                                                     "exportEspacePublications": [Function],
                                                                     "exportPublications": [Function],
                                                                     "fixRecord": [Function],
-                                                                    "getSecurity": [Function],
                                                                     "getSearchLookupApi": [Function],
+                                                                    "getSecurity": [Function],
                                                                     "getThirdPartyLookupApiUrl": [Function],
                                                                     "hidePossiblyYourPublicationsLure": [Function],
                                                                     "hideRecord": [Function],
@@ -6352,8 +6352,8 @@ exports[`Index page should render placeholders 1`] = `
                                                                     "showAppAlert": [Function],
                                                                     "submitThesis": [Function],
                                                                     "unclaimRecord": [Function],
-                                                                    "updateSecurity": [Function],
                                                                     "updateCurrentAuthor": [Function],
+                                                                    "updateSecurity": [Function],
                                                                   }
                                                                 }
                                                                 classes={
