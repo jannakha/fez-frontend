@@ -273,10 +273,27 @@ export function clearNewRecord() {
     };
 }
 
-export function getCommunitySecurity({ pid }) {
+export function getSecurity({ pid, type }) {
+    let API = null;
+
+    switch (type) {
+        case 'Community':
+            API = (request) => COMMUNITIES_SECURITY_POLICY_API(request);
+            break;
+        default:
+            break;
+    }
+
     return dispatch => {
+        if(!API) {
+            dispatch({
+                type: actions.SECURITY_POLICY_LOAD_CANCELLED,
+                payload: 'Unknown type'
+            });
+            return Promise.reject({message: 'Unknown type', status: 400});
+        }
         dispatch({type: actions.SECURITY_POLICY_LOADING});
-        return get(COMMUNITIES_SECURITY_POLICY_API({ pid }))
+        return get(API({ pid }))
             .then(response => {
                 const data = {};
                 const pidSearchKey = Object.keys(transformers.getPidSearchKey())[0];
@@ -308,14 +325,31 @@ export function getCommunitySecurity({ pid }) {
     };
 }
 
-export function updateCommunitySecurity({ pid, communitySecurity }) {
+export function updateSecurity({ pid, security, type }) {
+    let API = null;
+
+    switch (type) {
+        case 'Community':
+            API = (request) => COMMUNITIES_SECURITY_POLICY_API(request);
+            break;
+        default:
+            break;
+    }
+
     const request = {
         ...transformers.getPidSearchKey(pid),
-        ...transformers.getSecurityPolicySearchKey(communitySecurity)
+        ...transformers.getSecurityPolicySearchKey(security)
     };
     return dispatch => {
+        if(!API) {
+            dispatch({
+                type: actions.SECURITY_POLICY_SAVE_CANCELLED,
+                payload: 'Unknown type'
+            });
+            return Promise.reject({message: 'Unknown type', status: 400});
+        }
         dispatch({type: actions.SECURITY_POLICY_SAVING});
-        return patch(COMMUNITIES_SECURITY_POLICY_API(request))
+        return patch(API(request))
             .then((response) => {
                 dispatch({
                     type: actions.SECURITY_POLICY_SAVED,

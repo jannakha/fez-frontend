@@ -89,9 +89,6 @@ export const SecuritySection = ({ disabled, handleSubmit }) => {
             </Grid>
             <FormValuesContextConsumer>
                 {({ formValues }) => {
-                    if (!formValues.get('collectionDataStreamSecurity')) {
-                        formValues.set('collectionDataStreamSecurity', securityCollection.dataStreamPolicyID);
-                    }
                     return (
                         <React.Fragment>
                             {

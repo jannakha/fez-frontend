@@ -1171,10 +1171,12 @@ describe('Record action creators', () => {
         });
     });
 
-    describe('getCommunitySecurity()', () => {
-        it('dispatches expected actions on successful get', async () => {
+    describe('getSecurity()', () => {
+        it('dispatches expected actions on successful get of community', async () => {
+
             const testInput = {
-                pid: 'UQ:396321'
+                pid: 'UQ:396321',
+                type: 'Community'
             };
 
             const recordWithSecurityPolicy = {
@@ -1192,14 +1194,15 @@ describe('Record action creators', () => {
                 actions.SECURITY_POLICY_LOADED
             ];
 
-            await mockActionsStore.dispatch(recordActions.getCommunitySecurity(testInput));
+            await mockActionsStore.dispatch(recordActions.getSecurity(testInput));
             expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
 
         });
 
         it('dispatches expected actions on missing data in response', async () => {
             const testInput = {
-                pid: 'UQ:123456'
+                pid: 'UQ:123456',
+                type: 'Community'
             };
 
             mockApi
@@ -1211,12 +1214,14 @@ describe('Record action creators', () => {
                 actions.SECURITY_POLICY_LOADED
             ];
 
-            await mockActionsStore.dispatch(recordActions.getCommunitySecurity(testInput));
+            await mockActionsStore.dispatch(recordActions.getSecurity(testInput));
             expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
         });
 
         it('dispatches expected actions on missing request data', async () => {
-            const testInput = {};
+            const testInput = {
+                type: 'Community'
+            };
 
             mockApi
                 .onGet(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
@@ -1230,7 +1235,7 @@ describe('Record action creators', () => {
 
             let requestFailed = false;
             try {
-                await mockActionsStore.dispatch(recordActions.getCommunitySecurity(testInput));
+                await mockActionsStore.dispatch(recordActions.getSecurity(testInput));
             } catch(exception) {
                 expect(exception.status).toBe(500);
                 expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
@@ -1238,12 +1243,31 @@ describe('Record action creators', () => {
             }
             expect(requestFailed).toBe(true);
         });
+
+        it('dispatches expected actions on unspecified type', async () => {
+            const testInput = {};
+
+            const expectedActions = [
+                actions.SECURITY_POLICY_LOAD_CANCELLED
+            ];
+
+            let requestFailed = false;
+            try {
+                await mockActionsStore.dispatch(recordActions.getSecurity(testInput));
+            } catch(exception) {
+                expect(exception.status).toBe(400);
+                expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
+                requestFailed = true;
+            }
+            expect(requestFailed).toBe(true);
+        });
     });
 
-    describe('updateCommunitySecurity()', () => {
+    describe('updateSecurity()', () => {
         it('dispatches expected actions on successful update', async () => {
             const testInput = {
                 pid: 'UQ:396321',
+                type: 'Community',
                 communitySecurity: 2
             };
 
@@ -1256,14 +1280,15 @@ describe('Record action creators', () => {
                 actions.SECURITY_POLICY_SAVED
             ];
 
-            await mockActionsStore.dispatch(recordActions.updateCommunitySecurity(testInput));
+            await mockActionsStore.dispatch(recordActions.updateSecurity(testInput));
             expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
 
         });
 
         it('dispatches expected actions on missing data in response', async () => {
             const testInput = {
-                pid: 'UQ:123456'
+                pid: 'UQ:123456',
+                type: 'Community'
             };
 
             mockApi
@@ -1275,12 +1300,14 @@ describe('Record action creators', () => {
                 actions.SECURITY_POLICY_SAVED
             ];
 
-            await mockActionsStore.dispatch(recordActions.updateCommunitySecurity(testInput));
+            await mockActionsStore.dispatch(recordActions.updateSecurity(testInput));
             expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
         });
 
         it('dispatches expected actions on missing request data', async () => {
-            const testInput = {};
+            const testInput = {
+                type: 'Community'
+            };
 
             mockApi
                 .onPatch(repositories.routes.COMMUNITIES_SECURITY_POLICY_API(testInput).apiUrl)
@@ -1294,7 +1321,7 @@ describe('Record action creators', () => {
 
             let requestFailed = false;
             try {
-                await mockActionsStore.dispatch(recordActions.updateCommunitySecurity(testInput));
+                await mockActionsStore.dispatch(recordActions.updateSecurity(testInput));
             } catch(exception) {
                 expect(exception.status).toBe(500);
                 expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
@@ -1302,6 +1329,25 @@ describe('Record action creators', () => {
             }
             expect(requestFailed).toBe(true);
         });
+
+        it('dispatches expected actions on unspecified type', async () => {
+            const testInput = {};
+
+            const expectedActions = [
+                actions.SECURITY_POLICY_SAVE_CANCELLED
+            ];
+
+            let requestFailed = false;
+            try {
+                await mockActionsStore.dispatch(recordActions.updateSecurity(testInput));
+            } catch(exception) {
+                expect(exception.status).toBe(400);
+                expect(mockActionsStore.getActions()).toHaveDispatchedActions(expectedActions);
+                requestFailed = true;
+            }
+            expect(requestFailed).toBe(true);
+        });
+
     });
 
 });
