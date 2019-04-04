@@ -167,6 +167,7 @@ export class AppClass extends PureComponent {
     };
 
     render() {
+        console.log('render');
         const {classes} = this.props;
         if (this.props.accountLoading) {
             return (
