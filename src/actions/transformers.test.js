@@ -1,8 +1,9 @@
 import * as transformers from './transformers';
+import { CONTENT_INDICATORS } from 'config/general';
 
 const moment = require('moment');
 
-describe('getRecordLinkSearchKey test ', () => {
+describe('getRecordLinkSearchKey test', () => {
 
     it('should return request object structure with link', () => {
         const data = {
@@ -34,7 +35,7 @@ describe('getRecordLinkSearchKey test ', () => {
     });
 });
 
-describe('getRecordFileAttachmentSearchKey test ', () => {
+describe('getRecordFileAttachmentSearchKey test', () => {
 
     const MockDate = require('mockdate');
     beforeEach(() => {
@@ -260,7 +261,28 @@ describe('getRecordFileAttachmentSearchKey test ', () => {
     });
 });
 
-describe('getFixIssueRequest test ', () => {
+describe('getIssueValues test', () => {
+    const input = {
+        comments: 'test1',
+        rek_link: 'test2',
+        files: {
+            queue: [
+                { name: 'file1.txt' },
+                { name: 'file2.txt' },
+            ],
+        },
+        contentIndicators: CONTENT_INDICATORS.map(item => item.value),
+    };
+    const expected = {
+        comments: 'test1',
+        link: 'test2',
+        files: 'file1.txt, file2.txt',
+        contentIndicators: CONTENT_INDICATORS.map(item => item.text).join(', ')
+    };
+    expect(transformers.getIssueValues(input)).toEqual(expected);
+});
+
+describe('getFixIssueRequest test', () => {
 
     it('should create issue request', () => {
         const input = {publication: {}, author: {}};
@@ -284,7 +306,7 @@ describe('getFixIssueRequest test ', () => {
 
 });
 
-describe('unclaimRecord[Author/Contributor]SearchKey test ', () => {
+describe('unclaimRecord[Author/Contributor]SearchKey test', () => {
 
     it('should return empty author id request object', () => {
         const input = [];
@@ -450,7 +472,7 @@ describe('unclaimRecord[Author/Contributor]SearchKey test ', () => {
     });
 });
 
-describe('getRecordSubjectSearchKey test ', () => {
+describe('getRecordSubjectSearchKey test', () => {
 
     it('should return empty subject object', () => {
         expect(transformers.getRecordSubjectSearchKey()).toEqual({});
@@ -483,7 +505,7 @@ describe('getRecordSubjectSearchKey test ', () => {
     });
 });
 
-describe('getRecordSupervisorsSearchKey test ', () => {
+describe('getRecordSupervisorsSearchKey test', () => {
 
     it('should return empty supervisors object', () => {
         expect(transformers.getRecordSupervisorsSearchKey()).toEqual({});
@@ -517,7 +539,7 @@ describe('getRecordSupervisorsSearchKey test ', () => {
 
 });
 
-describe('getRecordAuthorsSearchKey test ', () => {
+describe('getRecordAuthorsSearchKey test', () => {
 
     it('should return empty request object', () => {
         expect(transformers.getRecordAuthorsSearchKey()).toEqual({});
@@ -550,7 +572,7 @@ describe('getRecordAuthorsSearchKey test ', () => {
     });
 });
 
-describe('getRecordAuthorsIdSearchKey test ', () => {
+describe('getRecordAuthorsIdSearchKey test', () => {
 
     it('should return empty authors object', () => {
         expect(transformers.getRecordAuthorsIdSearchKey()).toEqual({});
@@ -607,7 +629,7 @@ describe('getRecordAuthorsIdSearchKey test ', () => {
     });
 });
 
-describe('getRecordContributorsSearchKey test ', () => {
+describe('getRecordContributorsSearchKey test', () => {
 
     it('should return empty contributors object', () => {
         expect(transformers.getRecordContributorsSearchKey()).toEqual({});
@@ -643,7 +665,7 @@ describe('getRecordContributorsSearchKey test ', () => {
     });
 });
 
-describe('getRecordContributorsIdSearchKey test ', () => {
+describe('getRecordContributorsIdSearchKey test', () => {
 
     it('should return empty contributors request object', () => {
         expect(transformers.getRecordContributorsIdSearchKey()).toEqual({});
